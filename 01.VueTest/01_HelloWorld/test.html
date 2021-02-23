@@ -16,6 +16,8 @@
     -->
 
     <div id="root">
+      <input type="text" v-model="msg">
+      <!-- <p v-model="msg"></p> -->
       <p>{{msg}}</p>
     </div> 
 
@@ -38,6 +40,14 @@
               什么时候使用插值语法？当HTML中需要显示js中的数据，就用插值语法
               注意：不能用于标签属性，只能用于标签内
 
+            - 指令语法 v-xxx="JS表达式"
+
+              v-model 双向数据绑定
+                绑定input标签的value值（所以一上来input有内容显示）
+                绑定input标签的input事件（当input输入的值发生变化，会自动修改绑定的data数据）
+
+                只能用于: 表单项 input select radio textarea...
+
         3. 表达式和语句的区别
           表达式：
             有返回值的
@@ -53,8 +63,22 @@
           fn // 表达式
           fn() // 表达式
           fn; // 语句
+
+        4. MVVM
+          MVC
+            M - Model 数据层（数据库）
+            V - View 视图层（页面）
+            C - Controller 控制层（路由：接受请求，查询数据，返回给页面）
+    
+          MVVM
+            M - Model 数据层（模型） data
+            V - View 视图层 html
+            VM - ViewModel 视图模型层
+              Model的数据可以流向View视图（ViewModel负责从Model读取数据渲染到View层）
+              View视图的数据发生修改可以流向Model层（ViewModel负责绑定事件，从事件中读取View层修改的数据，再去修改Model的数据）
+              从而达到双向
       */
-      new Vue({
+      const vm = new Vue({
         // 配置对象: 里面的属性的属性名往往是固定的（不能随便写）
         // 属性名固定的对象
         el: '#root', // element 获取DOM元素（内部通过querySelector获取）
@@ -63,6 +87,8 @@
           msg
         }
       });
+
+      console.log(vm);
 
 
     </script>
