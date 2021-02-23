@@ -3,6 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>04_class与style绑定</title>
+    <style>
+      .red{
+        color: red;
+      }
+      .green{
+        color: green;
+      }
+    </style>
   </head>
   <body>
     <!--
@@ -20,15 +28,46 @@
 
     <div id="app">
       <h2>1. class绑定: :class='xxx'</h2>
-      <p>这是一段文字~</p>
-      <button>改变颜色</button>
+
+      <!-- <p class="red">这是一段文字~</p> -->
+      <!-- 字符串形式 -->
+      <!-- <p :class="color">这是一段文字~</p> -->
+      <!-- 对象形式 -->
+      <!-- <p :class="{ red: isRed, green: !isRed }">这是一段文字~</p> -->
+      <!-- 数组形式 -->
+      <p :class="['red', 'xxx']">这是一段文字~</p>
+
+      <button @click="changeColor">改变颜色</button>
 
       <h2>2. style绑定</h2>
-      <p>这是一段文字~</p>
-      <input type="text" placeholder="请输入字体大小" />
+      <!-- <p style="color: red;">这是一段文字~</p> -->
+
+      <p :style="{ color, fontSize: fontSize + 'px' }">这是一段文字~</p>
+      <input type="text" placeholder="请输入字体大小" v-model="fontSize"/>
     </div>
 
     <script src="../js/vue.js"></script>
-    <script></script>
+    <script>
+      /*
+        静态样式：用class
+        动态样式（样式会发生变化）：
+          样式如果是有限几种变化就用class
+          样式如果无穷的变化就只能用style
+      */
+      new Vue({
+        el: '#app',
+        data: {
+          color: 'red',
+          isRed: true,
+          fontSize: 16
+        },
+        methods: {
+          changeColor() {
+            // this.color = this.color === 'red' ? 'green' : 'red'
+            this.isRed = !this.isRed;
+          }
+        }
+      })
+    </script>
   </body>
 </html>
