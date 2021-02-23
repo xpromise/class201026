@@ -17,13 +17,53 @@
 
 <div id="demo">
   <h2>测试: v-for 遍历数组</h2>
+  <ul>
+    <!-- <li v-for="(item, index) in persons" :key="item.id">
+      {{ item.name }} -- {{ item.age }} -- {{index}}
+    </li> -->
 
+    <li v-for="person in persons" :key="person.id">
+      {{ person.name }} -- {{ person.age }} -- {{person.id}}
+    </li>
+  </ul>
   <h2>测试: v-for 遍历对象</h2>
-
+  <ul>
+    <li v-for="(value, key) in person" :key="key">
+      {{ value }} - {{key}}
+    </li>
+  </ul>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  /*
+    v-model 用于双向数据绑定
+    v-bind 用于强制绑定数据（单向数据绑定）
+      简写： :
+    v-on 用于绑定事件
+      简写： @
+    v-if / v-else-if / v-else 用于条件渲染（切换显示）
+    v-show 用于条件渲染（切换显示） 
+    v-for 用于列表渲染（遍历） 
+  */
+
+  new Vue({
+    el: '#demo',
+    data: {
+      persons: [
+        {id: 1, name: 'jack', age: 18},
+        {id: 2, name: 'rose', age: 16},
+        {id: 3, name: 'tom', age: 20},
+        {id: 4, name: 'jerry', age: 23},
+        {id: 5, name: 'peiqi', age: 24},
+        {id: 6, name: 'peihua', age: 10},
+      ],
+      person: {
+        name: 'jack',
+        age: 18
+      }
+    }
+  })
 
 </script>
 </body>

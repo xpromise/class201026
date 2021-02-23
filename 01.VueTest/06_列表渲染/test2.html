@@ -9,10 +9,47 @@
 1. 列表过滤
 2. 列表排序
 -->
-
+<div id="root">
+  <input type="text" placeholder="请输入搜索用户名" v-model="searchName">
+  <ul>
+    <li v-for="person in filterPersons" :key="person.id">
+      {{person.id}} -- {{person.name}} -- {{person.age}}
+    </li>
+  </ul>
+  <button>年龄升序</button>
+  <button>年龄降序</button>
+  <button>原本顺序</button>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#root',
+    data: {
+      searchName: '',
+      persons: [
+        {id: 1, name: 'jack', age: 18},
+        {id: 2, name: 'rose', age: 16},
+        {id: 3, name: 'tom', age: 20},
+        {id: 4, name: 'jerry', age: 23},
+        {id: 5, name: 'peiqi', age: 24},
+        {id: 6, name: 'peihua', age: 10},
+      ]
+    },
+    computed: {
+      // 计算属性：返回过滤后的数据
+      filterPersons() {
+        // 原数据 this.persons
+        // 过滤条件 this.searchName
+        const filterPersons = this.persons.filter((person) => {
+          // 如果用户名包含了searchName，就保留
+          // return person.name.includes(this.searchName);
+          return person.name.indexOf(this.searchName) !== -1;
+        });
 
+        return filterPersons;
+      }
+    }
+  })
 </script>
 </body>
 </html>

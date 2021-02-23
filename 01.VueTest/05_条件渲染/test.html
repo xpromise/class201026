@@ -14,9 +14,37 @@
         如果需要频繁切换 v-show 较好
       -->
 
-    <div id="app "></div>
+    <div id="app">
+
+      <!-- 
+        v-if 和 v-show 都能切换显示
+          不同的是 v-if 隐藏时会删除掉这个DOM元素 
+          而 v-show 隐藏时是通过样式display: none来隐藏元素
+            v-show性能比v-if更好
+            所以: 频繁切换用v-show较好
+       -->
+      <p>硅谷谁最帅</p>
+      <p v-if="flag">静哥年轻的时候</p>
+      <!-- <p v-if="!flag">华哥</p> -->
+      <!-- <p v-else-if="true">华哥</p>
+      <p v-else>雷哥</p> -->
+
+      <p v-show="flag">雷哥</p>
+      <!-- 
+        如果回调函数只有一条语句，可以直接写，省略函数
+        注意：不能写this，自己会自动去this上找
+       -->
+      <button @click="flag = !flag">按钮</button>
+    </div>
 
     <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+      new Vue({
+        el: '#app',
+        data: {
+          flag: true
+        }
+      })
+    </script>
   </body>
 </html>
