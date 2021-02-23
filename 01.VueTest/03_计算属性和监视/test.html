@@ -17,13 +17,106 @@
         计算属性存在缓存, 多次读取只执行一次getter计算
     -->
     <div id="app">
-      姓: <input type="text" placeholder="First Name" /><br />
-      名: <input type="text" placeholder="Last Name" /><br />
-      姓名1: <input type="text" placeholder="Full Name1" /><br />
-      姓名2: <input type="text" placeholder="Full Name2" /><br />
+      姓: <input type="text" placeholder="First Name" v-model="firstName"/><br />
+      名: <input type="text" placeholder="Last Name" v-model="lastName"/><br />
+      姓名1: <input type="text" placeholder="Full Name1" v-model="fullName1"/><br />
+      姓名2: <input type="text" placeholder="Full Name2" v-model="fullName2"/><br />
+
+      <p>{{num}}</p>
+      <button @click="handleClick">按钮</button>
     </div>
 
     <script type="text/javascript" src="../js/vue.js"></script>
-    <script type="text/javascript"></script>
+    <script type="text/javascript">
+
+      /*
+        计算属性：
+          当你需要通过原属性计算得到一个新数据，那么使用计算属性
+          计算属性里面不能做异步操作
+          比如：计算总价，计算总数等。。
+          特点：
+            1. 只读的计算属性和可读可写的计算属性
+            2. 计算属性有缓存
+              如果依赖的数据没有发生变化，是不会重新计算的
+              只有依赖的数据发生了变化，才会重新计算
+              注意：依赖的数据指的是读取方法中使用的this上的数据
+
+        监视属性:
+          当你需要通过原有属性的变化来干一些事，就用监视属性
+          比如: 可能涉及到发送请求就使用监视  
+
+          异同点:
+            1. 能用计算属性做的，都可以使用监视属性
+              但是，推荐使用计算属性
+            2. 涉及到异步操作只能使用监视属性  
+      */
+
+      new Vue({
+        el: '#app',
+        data: {
+          firstName: 'li',
+          lastName: 'peihua',
+          num: 0,
+          fullName2: 'li peihua'
+        },
+        methods: {
+          handleClick() {
+            this.num++;
+          }
+        },
+        // 计算属性
+        computed: {
+          // 只读的计算属性
+          // fullName1() {
+          //   // 数据代理：将data、methods、computed的数据直接代理到this上
+          //   // 所以，就可以直接通过this直接使用
+          //   // console.log(this); // 指向实例对象
+
+          //   return this.firstName + ' ' + this.lastName;
+          // }
+
+          // 可读可写的计算属性
+          fullName1: {
+            get() {
+              console.log(1111);
+              // 读取的方法
+              return this.firstName + ' ' + this.lastName;
+            },
+            set(newVal) {
+              // 设置的方法
+              console.log(newVal); // 修改的最新的值
+
+              // 数组的解构赋值
+              const [firstName, lastName] = newVal.split(' ');
+
+              this.firstName = firstName;
+              this.lastName = lastName;
+            }
+          }
+        },
+      
+        // 监视属性
+        watch: {
+          // 监视data中firstName属性的变化，一旦变化就会调用下面函数
+          firstName(newVal, oldVal) {
+            // console.log(newVal, oldVal);
+            // console.log(this.firstName);
+            // this.fullName2 = newVal + ' ' + this.fullName2.split(' ')[1];
+            this.fullName2 = newVal + ' ' + this.lastName;
+          },
+          lastName(newVal, oldVal) {
+            // console.log(newVal, oldVal);
+            // console.log(this.firstName);
+            // this.fullName2 = newVal + ' ' + this.fullName2.split(' ')[1];
+            this.fullName2 = this.firstName + ' ' + newVal;
+          },
+          fullName2(newVal) {
+            const [firstName, lastName] = newVal.split(' ');
+            this.firstName = firstName;
+            this.lastName = lastName;
+          }
+        }
+      })
+    </script>
   </body>
 </html>
