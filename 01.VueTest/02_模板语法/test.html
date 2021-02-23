@@ -30,10 +30,69 @@
       -->
     <div id="app">
       <h2>1. 双大括号表达式</h2>
+      <p>{{name}}</p>
+      <p>{{flag ? 111 : 222}}</p>
+      <!-- <p>{{ if (flag) { return 333 } }}</p> -->
 
       <h2>2. 指令一: 强制数据绑定</h2>
+      <!-- 原生js写法 -->
+      <input type="text" value="name">
+
+      <input type="text" v-bind:value="name">
+      <!-- v-bind的简写 -->
+      <input type="text" :value="name">
+
+      <!-- <input type="text" v-model="name"> -->
 
       <h2>3. 指令二: 绑定事件监听</h2>
+
+      <button v-on:click="handleClick">按钮1</button>
+      <button v-on:mousemove="handleClick">按钮2</button>
+      <!-- v-on简写 -->
+      <button @click="handleClick">按钮3</button>
+      
+      <input type="text" @input="handleInput">
+      <input type="text" @change="handleChange">
+
     </div>
+    <script src="../js/vue.js"></script>
+    <script>
+      /*
+        指令：
+          1. v-model 用于双向数据绑定
+          2. v-bind 强制数据绑定（单向数据绑定）
+            v-bind:属性名="JS表达式"
+            简写：  :属性名="JS表达式"
+            作用： 给标签属性绑定某个动态数据
+          3. v-on 用于绑定DOM事件
+            v-on:事件名="回调函数"  
+            事件名全是小写
+            回调函数会定义再methods中
+            简写：@事件名="回调函数"  
+            作用：用来绑定DOM事件
+      */
+
+      new Vue({
+        el: '#app',
+        data: { // 定义数据（非函数数据）
+          name: 'peihua',
+          flag: true
+        },
+        methods: { // 定义数据（函数数据）
+          // 定义函数一般都是普通函数，不会定义成箭头函数
+          handleClick(event) {
+            console.log(event);
+            console.log(this); // Vue的实例对象vm
+          },
+          handleInput(event) {
+            console.log('input', event.target.value);
+          },
+          handleChange(event) {
+            console.log('change', event.target.value);
+          }
+        }
+      })
+
+    </script>
   </body>
 </html>
