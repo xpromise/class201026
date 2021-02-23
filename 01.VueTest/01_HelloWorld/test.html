@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>01_HelloWorld</title>
+  </head>
+  <body>
+    <!--
+      1. 引入Vue.js
+      2. 创建Vue对象
+        el : 指定根element(选择器)
+        data : 初始化数据(页面可以访问)
+      3. 双向数据绑定 : v-model
+      4. 显示数据 : {{xxx}}
+      5. 理解vue的mvvm实现
+    -->
+
+    <div id="root">
+      <p>{{msg}}</p>
+    </div> 
+
+    <!-- 引入Vue -->
+    <script src="../js/vue.js"></script>
+    <script>
+      const msg = 'hello vue';
+      /*
+        1. 一旦引入Vue.js，全局就会多一个变量 Vue
+
+        2. 模板
+          - 模板页面 
+            HTML + CSS + JS
+          - 模板语法
+            - 插值语法（双大括号表达式）   {{JS表达式}}
+              OK：fn fn()
+              不OK: if/else for
+
+              插值语法作用：动态渲染（显示）js数据
+              什么时候使用插值语法？当HTML中需要显示js中的数据，就用插值语法
+              注意：不能用于标签属性，只能用于标签内
+
+        3. 表达式和语句的区别
+          表达式：
+            有返回值的
+            没有分号结尾
+          语句
+            没有返回值  
+            有分号（分号可以省略）
+
+          function fn() {} // 语句
+          const fn = () => {} // 函数表达式语句
+          if (a > 1) {} 语句
+          a > 1 // 表达式
+          fn // 表达式
+          fn() // 表达式
+          fn; // 语句
+      */
+      new Vue({
+        // 配置对象: 里面的属性的属性名往往是固定的（不能随便写）
+        // 属性名固定的对象
+        el: '#root', // element 获取DOM元素（内部通过querySelector获取）
+        data: {
+          // 多个数据
+          msg
+        }
+      });
+
+
+    </script>
+
+  </body>
+</html>
