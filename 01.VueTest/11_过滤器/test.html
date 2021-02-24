@@ -22,11 +22,39 @@
 <!--需求: 对当前时间进行指定格式显示-->
 <div id="test">
   <h2>显示格式化的日期时间</h2>
+  <p>{{date | formatDate1('YYYY-MM-DD')}}</p>
+  <p>{{date | formatDate1('HH:mm:ss')}}</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.3/dayjs.min.js"></script>
 <script>
+/*
+  处理日期的函数库
+    moment.js  老大哥，不在维护了
+    dayjs 类似于momentjs用法
+    date-fns 类似于lodash用法
+*/
 
+// 全局过滤器: 对所有组件生效
+Vue.filter('formatDate1', function (value, formatStr) {
+  return dayjs(value).format(formatStr);
+})
+
+new Vue({
+  el: '#test',
+  data: {
+    date: Date.now()
+  },
+  // 局部过滤器：格式化文本、日期
+  // 只对当前组件生效
+  filters: {
+    formatDate(value, formatStr) {
+      // console.log(value);
+      return dayjs(value).format(formatStr);
+    }
+  }
+})
 </script>
 </body>
 </html>
