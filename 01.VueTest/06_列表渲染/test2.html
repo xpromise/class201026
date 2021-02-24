@@ -16,9 +16,13 @@
       {{person.id}} -- {{person.name}} -- {{person.age}}
     </li>
   </ul>
-  <button>年龄升序</button>
-  <button>年龄降序</button>
-  <button>原本顺序</button>
+  <!-- <button @click="order('asc')">年龄升序</button>
+  <button @click="order('desc')">年龄降序</button>
+  <button @click="order('origin')">原本顺序</button> -->
+
+  <button @click="orderType = 'asc'">年龄升序</button>
+  <button @click="orderType = 'desc'">年龄降序</button>
+  <button @click="orderType = 'origin'">原本顺序</button>
 </div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
@@ -33,7 +37,13 @@
         {id: 4, name: 'jerry', age: 23},
         {id: 5, name: 'peiqi', age: 24},
         {id: 6, name: 'peihua', age: 10},
-      ]
+      ],
+      orderType: 'origin'
+    },
+    methods: {
+      // order(type) {
+      //   this.orderType = type;
+      // }
     },
     computed: {
       // 计算属性：返回过滤后的数据
@@ -46,7 +56,14 @@
           return person.name.indexOf(this.searchName) !== -1;
         });
 
-        return filterPersons;
+        // 排序
+        if (this.orderType === 'origin') return filterPersons;
+
+        const sortPersons = filterPersons.sort((a, b) => {
+          return this.orderType === 'asc' ? a.age - b.age : b.age - a.age ;
+        })
+
+        return sortPersons;
       }
     }
   })
