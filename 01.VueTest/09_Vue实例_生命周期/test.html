@@ -51,8 +51,8 @@
           做一些收尾工作：清除定时器、解绑事件
         destroyed
   */
-  new Vue({
-    el: '#root',
+  const vm = new Vue({
+    // el: '#root',
     data: {
       num: 0
     },
@@ -95,6 +95,8 @@
       console.log('destroyed()');
     },
   })
+
+  vm.$mount('#root');
 </script>
 </body>
 </html>

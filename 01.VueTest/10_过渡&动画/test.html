@@ -3,6 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>10_过渡&动画1</title>
+  <style>
+    .v-leave{
+      transform: translateX(0);
+    }
+    .v-leave-active{
+      transition: transform 2s;
+    }
+    .v-leave-to{
+      transform: translateX(100px);
+    }
+
+    .v-enter{
+      transform: translateX(100px);
+    }
+    .v-enter-active{
+      transition: transform 2s;
+    }
+    .v-enter-to{
+      transform: translateX(0);
+    }
+
+
+    .fade-leave{
+      transform: translateX(100px);
+    }
+    .fade-leave-active{
+      transition: transform 2s;
+    }
+    .fade-leave-to{
+      transform: translateX(0) !important;
+    }
+
+    .fade-enter{
+      transform: translateX(0) !important;
+    }
+    .fade-enter-active{
+      transition: transform 2s;
+    }
+    .fade-enter-to{
+      transform: translateX(100px);
+    }
+    .right{
+      transform: translateX(100px);
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -20,10 +65,38 @@
   xxx-enter: 指定隐藏时的样式
 -->
 
+<div id="root">
+  <!-- 
+    transition会为内部显示/隐藏的元素添加一些类名
+      显示 -> 隐藏
+        开始 v-leave
+        中间 v-leave-active
+        结束 v-leave-to
+      隐藏 -> 显示
+        开始 v-enter
+        中间 v-enter-active
+        结束 v-enter-to
+   -->
+  <transition>
+    <!-- <p v-show="isShow">尚硅谷</p> -->
+    <p v-if="isShow">尚硅谷</p>
+  </transition>
 
+  <transition name="fade">
+    <!-- <p v-show="isShow">尚硅谷</p> -->
+    <p v-if="isShow" class="right">尚硅谷</p>
+  </transition>
+
+  <button @click="isShow = !isShow">按钮</button>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: '#root',
+    data: {
+      isShow: true
+    }
+  })
 </script>
 </body>
 </html>

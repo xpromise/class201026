@@ -3,13 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <title>10_过渡&动画2</title>
+  <style>
+    .v-leave-active{
+      animation: move 5s linear 1s;
+    }
 
+    @keyframes move {
+      0%{ transform: translateX(0) }
+      50%{ transform: translateX(200px)  }
+      100%{ transform: translateX(100px) }
+    }
+  </style>
 </head>
 <body>
+<div id="root">
+  <transition type="animation">
+    <p v-show="isShow">尚硅谷</p>
+  </transition>
 
+  <button @click="isShow = !isShow">按钮</button>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script>
-
+  new Vue({
+    el: '#root',
+    data: {
+      isShow: true
+    }
+  })
 </script>
 </body>
 </html>
