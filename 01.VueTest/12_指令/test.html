@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>12_指令_内置指令</title>
+  <style>
+    [v-cloak] { display: none }
+  </style>
 </head>
 <body>
 <!--
 常用内置指令
-  v:text : 更新元素的 textContent
+  v-text : 更新元素的 textContent
   v-html : 更新元素的 innerHTML
   v-if : 如果为true, 当前标签才会输出到页面
   v-else: 如果为false, 当前标签才会输出到页面
@@ -16,16 +19,39 @@
   v-on : 绑定事件监听, 一般简写为@
   v-bind : 强制绑定解析表达式, 可以省略v-bind
   v-model : 双向数据绑定
-  ref : 为某个元素注册一个唯一标识, vue对象通过$els属性访问这个元素对象
   v-cloak : 使用它防止闪现表达式, 与css配合: [v-cloak] { display: none }
+  v-pre 跳过解析当前元素
+  v-once 只渲染元素和组件一次, 后续渲染会跳过
+  ref : 为某个元素注册一个唯一标识, vue对象通过$els属性访问这个元素对象
+    获取DOM元素或组件实例对象
 -->
 <div id="example">
-
+  <p v-cloak>{{msg1}}</p>
+  <p v-pre>{{msg1}}</p>
+  <!-- textContent / innerText -->
+  <p v-text="msg1"></p>
+  <!-- innerHTML -->
+  <p v-html="msg1"></p>
+  <p v-once>{{num}}</p>
+  <button @click="num++" ref="btn1">按钮1</button>
+  <button @click="num++" ref="btn2">按钮2</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+ new Vue({
+   el: '#example',
+   data: {
+     msg1: '<span>hello vue</span>',
+     num: 0
+   },
+   beforeMount() {
+      console.log(this.$refs);
+   },
+   mounted() {
+      console.log(this.$refs);
+   }
+ })
 </script>
 </body>
 </html>
