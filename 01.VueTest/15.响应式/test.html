@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <p>{{num}}</p>
+    <button @click="num++">按钮</button>
+
+    <ul>
+      <li v-for="value, key in person" :key="key">{{key}} -- {{value}}</li>
+    </ul>
+    <button @click="update">update</button>
+
+
+    <ul>
+      <li v-for="person in persons" :key="person.id">{{person.name}} -- {{person.age}}</li>
+    </ul>
+    <button @click="updatePersons">updatePersons</button>
+
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 响应式：当你更新数据的时候，数据发生了变化，同时用户界面也发生了变化
+    // 这个数据叫做响应式数据
+    new Vue({
+      el: '#root',
+      data: {
+        num: 0,
+        person: {
+          name: 'jack',
+          age: 18
+        },
+        persons: [
+          {id: 1, name: 'jack'},
+          {id: 2, name: 'rose'},
+        ]
+      },
+      methods: {
+        update() {
+          // this.person.age = 20; // 可以，是响应式的
+          // this.person.sex = '男'; // 不可以，不是响应式的
+          /*
+            data中原有所有属性都是响应式的，新添加的属性就不是响应式的
+              注意：
+                不要给对象添加新属性
+                  如果需要给对象添加新属性 this.$set
+                不要在数组通过下标去添加新值或新属性
+                  如果需要给数组添加新值，用push等方法
+          */
+          // this.$set(this.person, 'sex', '男'); // 这个方法，就是专门添加响应式数据的方法
+          // Vue.set(this.person, 'sex', '男'); // 这个方法，就是专门添加响应式数据的方法
+        },
+        updatePersons() {
+          
+          // this.persons[0].name = 'jacky'; // 可以
+          // this.persons[2] = {id: 3, name: 'peihua'}; // 不可以
+          this.persons[0].age = 18; // 不可以
+
+          // 数组的变更方法：Vue重写了数组的方法，所以能变成响应式
+          // this.persons.push({id: 3, name: 'peihua'}); // 可以
+        }
+      }
+    })
+  </script>
+</body>
+</html>
