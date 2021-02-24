@@ -23,16 +23,62 @@
 <div id="example">
 
   <h2>1. 绑定监听</h2>
+  <button v-on:click="handleClick">按钮1</button>
+  <button @click="handleClick1">按钮2</button>
+  <button @click="handleClick2(1, 2, 3, 4)">按钮3</button>
+  <button @click="handleClick3(1, 2, $event)">按钮4</button>
+  <p>{{num}}</p>
+  <button @click="num++">按钮5</button>
 
   <h2>2. 事件修饰符</h2>
+  <!-- 更多的事件修饰符：https://cn.vuejs.org/v2/api/#v-on -->
+  <a @click.prevent="handleClick" href="http://www.atguigu.com">硅谷</a>
+  
+  <div @click="handleClick5">
+    111111111111111111
+    <div @click.stop="handleClick4">222222222222222</div>
+  </div>
 
   <h2>3. 按键修饰符</h2>
+  <!-- 支持所有按键 -->
+  <input type="text" @keyup.13="handleKeyup">
+  <!-- 只支持部分 -->
+  <input type="text" @keyup.space="handleKeyup">
 
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
-
+  new Vue({
+    el: '#example',
+    data: {
+      num: 0
+    },
+    methods: {
+      handleClick(e) {
+        // e.preventDefault();
+      },
+      handleClick1(event) { console.log(event); },
+      handleClick2() {
+        console.log(arguments);
+      },
+      handleClick3(a, b, event) {
+        console.log(a, b, event);
+      },
+      handleClick4() {
+        console.log(4444444);
+      },
+      handleClick5() {
+        console.log(55555555);
+      },
+      handleKeyup(e) {
+        // console.log(e);
+        // if (e.keyCode === 13) {
+          console.log(13);
+        // }
+      }
+    }
+  })
 </script>
 </body>
 </html>
