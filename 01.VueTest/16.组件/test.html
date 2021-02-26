@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <!-- 3. 使用组件 -->
+    <test-component></test-component>
+    <!-- <TestComponent></TestComponent> -->
+    <!-- <test-component></test-component>
+    <test-component></test-component>
+    <test-component></test-component> -->
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    /*
+      在组件中data为什么要定义成函数形式？
+        如果data使用对象形式，所用相同组件会共享同一份data数据，导致其中一个组件变了，其他都变
+        因为data是函数形式，调用会返回一个全新的data对象，这样所有组件都会有自己的data数据
+    */
+    // 1. 定义组件
+    // const TestComponent = Vue.extend({
+    //   // data: {
+    //   //   msg: 'hello'
+    //   // },
+    //   data() {
+    //     return {
+    //       msg: 'hello',
+    //       num: 0
+    //     }
+    //   },
+    //   methods: {
+    //     handleClick() {
+    //       console.log('111');
+    //     }
+    //   },
+    //   // 模板：组件html代码
+    //   template: '<p @click="handleClick">{{msg}}</p>'
+    // })
+
+    // new Vue({
+    //   el: '#root',
+    //   // 2. 注册局部组件
+    //   components: {
+    //     'test-component': TestComponent,
+    //     // 'TestComponent': TestComponent,
+    //   }
+    // })
+
+    // 局部组件的简写
+    // new Vue({
+    //   el: '#root',
+    //   // 2. 注册局部组件
+    //   components: {
+    //     // 组件名称: 组件配置对象
+    //     'test-component': {
+    //       data() {
+    //         return {
+    //           msg: 'hello',
+    //           num: 0
+    //         }
+    //       },
+    //       methods: {
+    //         handleClick() {
+    //           console.log('111');
+    //         }
+    //       },
+    //       // 模板：组件html代码
+    //       template: '<p @click="handleClick">{{msg}}</p>'
+    //     }
+    //   }
+    // })
+
+    // 注册全局组件
+    Vue.component('test-component', {
+      data() {
+        return {
+          msg: 'hello',
+          num: 0
+        }
+      },
+      methods: {
+        handleClick() {
+          console.log('111');
+        }
+      },
+      // 模板：组件html代码
+      template: '<p @click="handleClick">{{msg}}</p>'
+    })
+
+    // 全局组件
+    new Vue({
+      el: '#root'
+    })
+
+  </script>
+</body>
+</html>
