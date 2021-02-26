@@ -1,30 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
+  <!-- 
+  写html：组件页面结构 
+  要求必须有一个根标签
+-->
+  <div>
     <!-- 使用组件 -->
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <TestComponent />
+    <TestComponent></TestComponent>
+    <test-component />
+    <test-component></test-component>
+    
+    <p class="title">{{ num }}</p>
+    <button @click="handleClick">按钮</button>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
-// 向外默认暴露组件配置对象
+// 引入其他组件
+import TestComponent from "./views/TestComponent";
+// 写js代码：组件配置对象
 export default {
-  name: "App", // 给组件取一个名称（组件名称）：将来vue devtool就可以看到组件名字了
-  components: { // 注册局部组件
-    HelloWorld,
+  name: "App", // 组件名称：在vue调试工具显示
+  data() {
+    return {
+      num: 0,
+    };
+  },
+  methods: {
+    handleClick() {
+      this.num++;
+    },
+  },
+  // 注册局部组件
+  components: {
+    TestComponent,
   },
 };
 </script>
 
-<style lang='less'>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="less">
+// 写css
+.title {
+  font-size: 30px;
+  color: yellowgreen;
 }
 </style>
