@@ -5,9 +5,31 @@
   <title>17_插件</title>
 </head>
 <body>
-
+<div id="root">
+  <p v-upper-case="msg"></p>
+  <p>{{date | formatDate('YYYY-MM-DD')}}</p>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.3/dayjs.min.js"></script>
+<script src="./myPlugin.js"></script>
+
 <script type="text/javascript">
+
+  Vue.use(myPlugin);
+  // Vue.use(xxxx);
+
+  new Vue({
+    el: '#root',
+    data: {
+      msg: 'hello',
+      date: Date.now()
+    },
+    mounted() {
+      Vue.globalMethod();
+      this.$localMethod();
+    }
+  })
+
 
 </script>
 </body>
