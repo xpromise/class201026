@@ -2,8 +2,8 @@
   <div>
     <p>{{ num }}</p>
     <!-- 绑定自定义事件, 凡是给组件绑定的事件都是自定义事件 -->
-    <Child @add="add" @click="add" />
-    <!-- <Child ref="child" /> -->
+    <!-- <Child @add="add" @click="add" /> -->
+    <Child ref="child" />
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import Child from "./Child";
       1. 绑定事件
         - <Child @事件名称="事件回调函数" />
 
-        - <Child ref="xxx" />
+        - <Child ref="xxx" /> （通过this.$listeners获取不到）
           mounted() {
             this.$refs.xxx.$on(事件名称, 事件回调函数)
           }
@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     // 绑定持续自定义事件
-    // this.$refs.child.$on("add", this.add);
+    this.$refs.child.$on("add", this.add);
     // 一个事件可以绑定n个回调函数
     // this.$refs.child.$on("add", () => {
     //   console.log(222);
