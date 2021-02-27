@@ -1,8 +1,8 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header />
-      <List :todos="todos" />
+      <Header :addTodo="addTodo" />
+      <List :todos="todos" :updateTodo="updateTodo"/>
       <Footer />
     </div>
   </div>
@@ -18,11 +18,20 @@ export default {
   data() {
     return {
       todos: [
-        { id: 1, name: "吃饭" },
-        { id: 2, name: "睡觉" },
-        { id: 3, name: "coding" },
+        { id: 1, name: "吃饭", isDone: true },
+        { id: 2, name: "睡觉", isDone: false },
+        { id: 3, name: "coding", isDone: false },
       ],
     };
+  },
+  methods: {
+    addTodo(name) {
+      this.todos.unshift({ id: Date.now(), name });
+    },
+    updateTodo(id) {
+      const todo = this.todos.find((todo) => todo.id === id);
+      todo.isDone = !todo.isDone;
+    },
   },
   components: {
     Header,
