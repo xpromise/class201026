@@ -1,47 +1,75 @@
 <template>
-  <!-- 
-    写html：组件页面结构 
-    要求必须有一个根标签
-  -->
   <div>
-    <!-- 使用组件 -->
-    <TestComponent />
-    <TestComponent></TestComponent>
-    <test-component />
-    <test-component></test-component>
-    
-    <p class="title">{{ num }}</p>
-    <button @click="handleClick">按钮</button>
+    <p>{{ num }}</p>
+    <!-- 绑定自定义事件, 凡是给组件绑定的事件都是自定义事件 -->
+    <Child @add="add" @click="add" />
+    <!-- <Child ref="child" /> -->
   </div>
 </template>
 
 <script>
-// 引入其他组件
-import TestComponent from "./views/TestComponent";
-// 写js代码：组件配置对象
+import Child from "./Child";
+/*
+  自定义事件：可以用来组件间通信（子 --> 父）
+    注意：给某个组件绑定，就只有这个组件可以触发
+    使用：
+      1. 绑定事件
+        - <Child @事件名称="事件回调函数" />
+
+        - <Child ref="xxx" />
+          mounted() {
+            this.$refs.xxx.$on(事件名称, 事件回调函数)
+          }
+          beforeDestroy() {
+            // 解绑事件
+            this.$refs.xxx.$off(事件名称, 事件回调函数);
+          },
+
+      2. 触发事件
+        - this.$emit(事件名称, 参数1, 参数2...)
+        - this.$listeners.事件名称(参数1, 参数2...)
+
+        组件实例对象上的方法：
+          $on
+          $once
+          $off
+          $emit
+*/
+
 export default {
-  name: "App", // 组件名称：在vue调试工具显示
+  name: "App",
   data() {
     return {
       num: 0,
     };
   },
+  mounted() {
+    // 绑定持续自定义事件
+    // this.$refs.child.$on("add", this.add);
+    // 一个事件可以绑定n个回调函数
+    // this.$refs.child.$on("add", () => {
+    //   console.log(222);
+    // });
+    // 绑定一次性自定义事件
+    // this.$refs.child.$once("add", this.add);
+    // console.log(this.$listeners);
+    // this.$emit("add");
+  },
+  beforeDestroy() {
+    // 解绑事件
+    // this.$refs.child.$off("add", this.add);
+  },
   methods: {
-    handleClick() {
-      this.num++;
+    add(x, y) {
+      console.log(111);
+      this.num = this.num + x + y;
     },
   },
-  // 注册局部组件
   components: {
-    TestComponent,
+    Child,
   },
 };
 </script>
 
-<style lang="less">
-// 写css
-.title {
-  font-size: 30px;
-  color: yellowgreen;
-}
+<style>
 </style>

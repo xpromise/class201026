@@ -21,12 +21,9 @@ import Footer from "./views/Footer";
 export default {
   name: "App",
   data() {
+    const todos = JSON.parse(window.localStorage.getItem("todos")) || [];
     return {
-      todos: [
-        { id: 1, name: "吃饭", isDone: true },
-        { id: 2, name: "睡觉", isDone: false },
-        { id: 3, name: "coding", isDone: false },
-      ],
+      todos,
     };
   },
   computed: {
@@ -59,6 +56,11 @@ export default {
     },
     delAllDoneTodos() {
       this.todos = this.todos.filter((todo) => !todo.isDone);
+    },
+  },
+  watch: {
+    todos(newVal) {
+      window.localStorage.setItem("todos", JSON.stringify(newVal));
     },
   },
   components: {
