@@ -1,7 +1,9 @@
 <template>
   <div>
     <p>child..</p>
-    <button @click="add">Child的按钮</button>
+    <button @click="$globalEventBus.$emit('ChildToApp', 'hello app')">
+      child按钮
+    </button>
   </div>
 </template>
 
@@ -9,17 +11,10 @@
 export default {
   name: "Child",
   mounted() {
-    // 子组件通过 this.$listeners 属性获取到自定义的事件
-    console.log(this.$listeners);
-  },
-  methods: {
-    add() {
-      // 触发自定义事件的回调函数
-      // this.$listeners.add(1, 2);
-
-      // 触发自定义事件的方法
-      this.$emit("add", 3, 4);
-    },
+    // 通过 $globalEventBus（全局事件总线）对象来绑定事件
+    this.$globalEventBus.$on("AppToChild", (msg) => {
+      console.log("child", msg);
+    });
   },
 };
 </script>
