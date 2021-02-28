@@ -15,31 +15,29 @@
 
 <script>
 import CommentItem from "../CommentItem";
-
 export default {
   name: "CommentList",
-  data() {
-    return {
-      comments: [
-        { id: 1, username: "peihua", content: "i like jingge" },
-        { id: 2, username: "jingge", content: "i like leige" },
-      ],
-    };
-  },
-  mounted() {
-    this.$bus.$on("addComment", this.addComment);
-  },
-  beforeDestroy() {
-    this.$bus.$off("addComment", this.addComment);
-  },
-  methods: {
-    addComment(comment) {
-      this.comments.unshift({ ...comment, id: Date.now() });
+  // 声明接受props数据
+  // props: ["comments"],
+  // props: {
+  //   // 接受的props属性是comments，类型为数组
+  //   comments: Array,
+  // },
+  props: {
+    // 接受的props属性是comments，类型为数组
+    comments: {
+      type: Array,
+      required: true,
     },
-    delComment(id) {
-      this.comments = this.comments.filter((comment) => comment.id !== id);
+    delComment: {
+      type: Function,
+      required: true,
     },
   },
+  // mounted() {
+  //   // 使用props  props会被数据代理
+  //   console.log(this.comments);
+  // },
   components: {
     CommentItem,
   },

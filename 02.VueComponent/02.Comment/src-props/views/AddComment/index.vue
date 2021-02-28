@@ -37,6 +37,7 @@
 <script>
 export default {
   name: "AddComment",
+  props: ["addComment"],
   data() {
     return {
       comment: {
@@ -46,6 +47,17 @@ export default {
     };
   },
   methods: {
+    /*
+      props方案：组件间通信方案
+        适用于：父子组件通信
+        - 父 --> 子 
+          直接传递普通数据（非函数数据）
+          子组件声明接受可以直接使用
+          注意：props通信数据是只读的，不可直接修改（数据源在哪，更新数据的方法就在哪）
+        - 子 --> 父
+          父组件给子组件传递函数数据
+          子组件通过调用函数，来修改父组件数据
+    */
     submit() {
       const { username, content } = this.comment;
       // 如果输入内容为空，给出错误提示
@@ -54,7 +66,7 @@ export default {
         return;
       }
       // 添加评论
-      this.$bus.$emit("addComment", this.comment);
+      this.addComment(this.comment);
       // 清空表单
       this.comment.username = "";
       this.comment.content = "";
