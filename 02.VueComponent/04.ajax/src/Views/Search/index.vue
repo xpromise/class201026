@@ -28,7 +28,7 @@ export default {
         alert("请输入搜索内容~");
         return;
       }
-      if (oldSearchName === searchName) {
+      if (this.oldSearchName === searchName) {
         return;
       }
       this.$bus.$emit("sendSearchName", searchName);
