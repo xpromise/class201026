@@ -19,7 +19,7 @@
           - 父组件给子组件设置要传递的标签数据
             <Child><template v-slot:xxx="{ yyy }">xxx</template></Child>
           - 子组件声明使用
-            <slot name="xxx" :yyy="yyy"/> 
+            <slot name="xxx" :yyy="yyy" /> 
      -->
 
     <A>
@@ -60,7 +60,7 @@
       </template>
     </B>
 
-    <!-- 作用域插槽： --> 
+    <!-- 作用域插槽： -->
     <C>
       <!-- <template #content="slotProps">
         <p>count的值：{{ slotProps.count }}</p>
