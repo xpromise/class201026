@@ -54,7 +54,7 @@
   - import 动态导入 --> 路由懒加载
 
 - es10
-  - Array.flat(Infinity) 数组扁平化  
+  - Array.prototype.flat(Infinity) 数组扁平化  
 
 - es11
   - BigInt 新的基本数据类型
