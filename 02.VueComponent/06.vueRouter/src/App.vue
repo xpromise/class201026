@@ -19,9 +19,10 @@
               内部会找到路由的配置项routes，根据里面的配置来匹配路由路径，加载相应的路由组件
          -->
         <li>
-          <router-link active-class="active" to="/about">About</router-link>
+          <!-- <router-link active-class="active" to="/about">About</router-link> -->
+          <router-link to="/about">About</router-link>
         </li>
-        <li><router-link active-class="active" to="/home">Home</router-link></li>
+        <li><router-link to="/home">Home</router-link></li>
       </ul>
       <div class="col-md-8"><router-view /></div>
     </div>
@@ -32,7 +33,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .router-link-active {
   color: red !important;
 }
