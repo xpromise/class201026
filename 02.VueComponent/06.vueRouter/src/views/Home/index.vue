@@ -12,6 +12,30 @@
 <script>
 export default {
   name: "Home",
+  beforeCreate() {
+    console.log("Home beforeCreate");
+  },
+  created() {
+    console.log("Home created");
+  },
+  beforeMount() {
+    console.log("Home beforeMount");
+  },
+  mounted() {
+    console.log("Home mounted");
+  },
+  beforeDestroy() {
+    console.log("Home beforeDestroy");
+  },
+  destroyed() {
+    console.log("Home destroyed");
+  },
+  activated() {
+    console.log("Home activated");
+  },
+  deactivated() {
+    console.log("Home deactivated");
+  },
 };
 </script>
 

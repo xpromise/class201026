@@ -24,13 +24,30 @@
         </li>
         <li><router-link to="/home">Home</router-link></li>
       </ul>
-      <div class="col-md-8"><router-view /></div>
+      <div class="col-md-8">
+        <keep-alive include="Home,About"> <router-view /></keep-alive>
+        <!-- <keep-alive exclude="Home"> <router-view /></keep-alive> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "App",
+  beforeCreate() {
+    console.log("App beforeCreate");
+  },
+  created() {
+    console.log("App created");
+  },
+  beforeMount() {
+    console.log("App beforeMount");
+  },
+  mounted() {
+    console.log("App mounted");
+  },
+};
 </script>
 
 <style scoped>

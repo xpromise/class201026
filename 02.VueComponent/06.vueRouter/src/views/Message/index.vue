@@ -80,6 +80,8 @@
           }"
           >{{ message.title }}</router-link
         >
+        <button @click="push(message.id)">push</button>
+        <button @click="replace(message.id)">replace</button>
       </li>
     </ul>
     <router-view sex="男"></router-view>
@@ -102,6 +104,28 @@ export default {
         { id: 5, title: "message005" },
       ];
     }, 2000);
+  },
+  methods: {
+    push(id) {
+      // this.$router.history.push(`/home/message/detail/${id}`);
+      // 编程式导航
+      this.$router.history.push({
+        name: "Detail",
+        params: {
+          id,
+        },
+        query: { name: "jack" },
+      });
+    },
+    replace(id) {
+      this.$router.history.replace({
+        name: "Detail",
+        params: {
+          id,
+        },
+        query: { name: "jack" },
+      });
+    },
   },
 };
 </script>
