@@ -131,3 +131,16 @@
 - 当使用keep-alive缓存的组件会多两个生命周期函数
   - activated
   - deactivated
+
+## 前端路由的两种模式
+1. hash
+特点：
+  - 兼容性较好
+  - 地址栏带 #（不太美观）
+  - window.location.hash
+
+2. history
+特点：
+  - 兼容性较差
+  - 地址栏不带 #（更美观）
+  - window.history

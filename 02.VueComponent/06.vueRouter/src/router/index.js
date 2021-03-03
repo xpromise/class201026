@@ -11,6 +11,7 @@ import Detail from "../views/Detail";
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+	mode: "history",
 	// 路由配置项：放置n个路由的配置
 	routes: [
 		{
@@ -23,7 +24,7 @@ const router = new VueRouter({
 					component: Message, // 路由组件
 					children: [
 						{
-							name: 'Detail', // 命名路由
+							name: "Detail", // 命名路由
 							// 能匹配多个路径
 							path: "detail/:id",
 							component: Detail,
